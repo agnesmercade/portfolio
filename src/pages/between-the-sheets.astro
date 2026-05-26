@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const CDN = "https://images.squarespace-cdn.com/content/v1/69788340c4a614347d63a918/";
+const fmt = "?format=1500w";
+
+const images = [
+  CDN + "98ce9fbb-1bc0-46da-b8b8-79a779edb7f5/Captura+de+pantalla+2026-03-14+a+las+19.24.00.png" + fmt,
+  CDN + "a6f6a088-738a-4366-b681-a635e2dea399/tempImageaAH5Pi.jpg" + fmt,
+  CDN + "d083bb65-91a4-4173-91c8-d819a00fec1d/tempImageC5Bpwl.jpg" + fmt,
+  CDN + "c34724c6-f947-4789-8fab-c1e68cf10eed/tempImagebugiGK.jpg" + fmt,
+  CDN + "98cbeb00-fadc-4278-9fd5-b523aca42cc4/IMG_0585.JPG" + fmt,
+  CDN + "17b326c2-db1e-491f-9b88-5879203bb4af/IMG_0590.JPG" + fmt,
+  CDN + "061bdea0-4d1b-4146-a25a-2d04dee32b9e/IMG_0587.JPG" + fmt,
+];
+---
+
+<Layout title="Between the Sheets — Agnès Mercadé">
+  <section class="project-detail">
+    <h1>Between the Sheets</h1>
+    <div class="project-description">
+      <p>An ongoing photographic series set within Barcelona's interior courtyards.</p>
+      <p>
+        Through laundry lines, moving fabrics, and shifting light, the images capture quiet traces
+        of everyday life hidden inside the city's blocks. The series explores the subtle rhythms
+        of these spaces, where architecture, light, and domestic details shape an intimate atmosphere.
+      </p>
+      <p>
+        Between hanging sheets, moving fabrics, and shifting light, the images linger on quiet traces
+        of everyday life — glimpsed rather than seen — inside the city's blocks. The series explores
+        the subtle rhythms of these spaces, where architecture, light, and domestic details create an
+        intimate, almost private atmosphere.
+      </p>
+    </div>
+
+    <div class="project-gallery cols-1">
+      {images.map(src => (
+        <img src={src} alt="" loading="lazy" />
+      ))}
+    </div>
+  </section>
+</Layout>

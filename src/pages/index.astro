@@ -1,0 +1,200 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const CDN = "https://images.squarespace-cdn.com/content/v1/69788340c4a614347d63a918/";
+
+// 9 images matching the reference layout (mix of Santander + Echoes of Comfort)
+const images = [
+  { href: "/santander",         src: CDN + "4d7bb668-f145-4b96-b6e0-3f3c26fd59ba/A031342-R1-24-25A.jpg?format=2500w" },
+  { href: "/santander",         src: CDN + "84c7ec12-1543-4fe3-8dce-497006e57347/PICT3599.JPG?format=2500w" },
+  { href: "/santander",         src: CDN + "bae3124b-0f49-4d34-8a47-e46a7e73dcce/A031341-R1-07-9.jpg?format=2500w" },
+  { href: "/echoes-of-comfort", src: CDN + "1076f59d-8d65-41f2-94f3-8cbadf4ac880/llabiafinal-024.jpg?format=2500w" },
+  { href: "/santander",         src: CDN + "2f52eeb6-96d4-470c-b461-454ee1f0ae3b/A031341-R1-33-35.jpg?format=2500w" },
+  { href: "/santander",         src: CDN + "95c6f845-f667-4ae6-97df-21278a258fd1/PICT3600.JPG?format=2500w" },
+  { href: "/echoes-of-comfort", src: CDN + "6b385efd-0bdb-4f78-9074-1d28e2c0469d/llabiafinal-004.jpg?format=2500w" },
+  { href: "/echoes-of-comfort", src: CDN + "a2432303-900b-43b7-a383-006bbf200aa2/llabiafinal-002.jpg?format=2500w" },
+  { href: "/santander",         src: CDN + "8670b9b7-964d-451b-8ccc-4cefe8b63e3f/PICT3584.JPG?format=2500w" },
+];
+---
+
+<Layout title="Agnès Mercadé">
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-tagline">Creative. Intuitive. Intentional. Visual.</p>
+      <p class="hero-sub">Work across image, digital marketing and video.</p>
+    </div>
+  </section>
+
+  <div id="homeGallery">
+    {images.map(item => (
+      <a href={item.href} class="gal-item">
+        <img src={item.src} alt="" />
+      </a>
+    ))}
+  </div>
+</Layout>
+
+<style is:global>
+  #homeGallery {
+    background: #000;
+    padding: 0 var(--gutter);
+    /* Fallback column layout before JS */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* Fallback: stacked full-width strips */
+  #homeGallery > .gal-item {
+    display: block;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  /* JS-created row containers */
+  #homeGallery .gal-row {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  /* Items inside rows */
+  #homeGallery .gal-row .gal-item {
+    display: block;
+    overflow: hidden;
+    flex-shrink: 0;
+    min-width: 0;
+  }
+
+  #homeGallery .gal-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.65s ease;
+  }
+
+  #homeGallery .gal-item:hover img {
+    transform: scale(1.03);
+  }
+</style>
+
+<script>
+  const GAP = 8;
+
+  function layout() {
+    const gallery = document.getElementById('homeGallery');
+    if (!gallery) return;
+
+    const items = Array.from(gallery.querySelectorAll('.gal-item')) as HTMLElement[];
+    if (!items.length) return;
+
+    const cs = getComputedStyle(gallery);
+    const W = gallery.offsetWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    if (!W) return;
+
+    // Aspect ratios (fallback 3:2 if image not yet loaded)
+    const ratios = items.map(el => {
+      const img = el.querySelector('img') as HTMLImageElement;
+      return img?.naturalWidth && img?.naturalHeight
+        ? img.naturalWidth / img.naturalHeight
+        : 1.5;
+    });
+
+    const n = items.length;
+
+    const vw = window.innerWidth;
+
+    // Single column on small phones — use viewport width so padding doesn't skew the check
+    if (vw < 768) {
+      gallery.innerHTML = '';
+      gallery.style.cssText = 'display:flex;flex-direction:column;gap:8px;background:#000;';
+      items.forEach(el => {
+        // height:auto overrides the CSS fallback (200px) so aspect ratio is preserved
+        el.style.cssText = 'display:block;width:100%;height:auto;overflow:hidden;';
+        const img = el.querySelector('img') as HTMLImageElement | null;
+        if (img) img.style.cssText = 'width:100%;height:auto;display:block;transition:transform 0.65s ease;';
+        gallery.appendChild(el);
+      });
+      return;
+    }
+
+    // Justified rows.
+    // Math.floor keeps nRows conservative so the last row is never a lone image.
+    // Breakpoints: <768 single-col | 768-1023 ~2/row | 1024-1340 ~3/row | 1341+ ~4-5/row
+    const targetPerRow = vw >= 1341 ? 4.5 : vw >= 1024 ? 3 : 2;
+    const nRows = Math.max(1, Math.floor(n / targetPerRow));
+
+    // Partition by image count (floor(n/nRows) per row) so the number of images per row
+    // matches the target regardless of aspect ratios. The last row absorbs the remainder.
+    const imgsPerRow = Math.floor(n / nRows);
+    type Entry = { el: HTMLElement; ratio: number };
+    const rows: Entry[][] = [];
+    let cur: Entry[] = [];
+
+    for (let i = 0; i < n; i++) {
+      cur.push({ el: items[i], ratio: ratios[i] });
+      if (cur.length >= imgsPerRow && rows.length < nRows - 1) {
+        rows.push(cur);
+        cur = [];
+      }
+    }
+    if (cur.length) rows.push(cur);
+
+    // Safety: lone last image → borrow one from previous row
+    if (rows.length > 1 && rows[rows.length - 1].length === 1 && rows[rows.length - 2].length > 1) {
+      rows[rows.length - 1].unshift(rows[rows.length - 2].pop()!);
+    }
+
+    // Rebuild DOM
+    gallery.innerHTML = '';
+    gallery.style.cssText = 'display:flex;flex-direction:column;gap:8px;background:#000;';
+
+    rows.forEach(row => {
+      const totalR = row.reduce((s, x) => s + x.ratio, 0);
+      const rowH = (W - GAP * (row.length - 1)) / totalR;
+
+      const rowDiv = document.createElement('div');
+      rowDiv.className = 'gal-row';
+      rowDiv.style.cssText = `display:flex;flex-direction:row;gap:${GAP}px;height:${rowH}px;width:100%;overflow:hidden;flex-shrink:0;`;
+
+      row.forEach(({ el, ratio }) => {
+        el.style.cssText = `flex-grow:${ratio};flex-basis:0;flex-shrink:0;height:${rowH}px;overflow:hidden;display:block;min-width:0;`;
+        const img = el.querySelector('img') as HTMLImageElement | null;
+        if (img) img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.65s ease;';
+        rowDiv.appendChild(el);
+      });
+
+      gallery.appendChild(rowDiv);
+    });
+  }
+
+  function init() {
+    const gallery = document.getElementById('homeGallery');
+    if (!gallery) return;
+
+    const imgs = Array.from(gallery.querySelectorAll('img')) as HTMLImageElement[];
+    let loaded = 0;
+    const check = () => { if (++loaded >= imgs.length) layout(); };
+
+    imgs.forEach(img => {
+      if (img.complete && img.naturalWidth) check();
+      else {
+        img.addEventListener('load', check, { once: true });
+        img.addEventListener('error', check, { once: true });
+      }
+    });
+
+    let t: ReturnType<typeof setTimeout>;
+    window.addEventListener('resize', () => {
+      clearTimeout(t);
+      t = setTimeout(layout, 80);
+    }, { passive: true });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+</script>

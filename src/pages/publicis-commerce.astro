@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const CDN = "https://images.squarespace-cdn.com/content/v1/69788340c4a614347d63a918/";
+const fmt = "?format=1500w";
+
+const images = [
+  CDN + "16ca8c9e-382a-452f-a9f9-9106d19118e3/Captura+de+pantalla+2026-02-27+a+las+10.32.28.png" + fmt,
+  CDN + "fe075514-c916-4006-8921-528cd08006db/Captura+de+pantalla+2026-02-27+a+las+10.30.56.png" + fmt,
+  CDN + "1b9420c1-c139-439f-a8ce-b67b05888183/Captura+de+pantalla+2026-02-27+a+las+10.32.54.png" + fmt,
+  CDN + "a22dbde5-3344-4135-8ba8-e7df579eb3ad/Captura+de+pantalla+2026-03-14+a+las+19.32.15.png" + fmt,
+  CDN + "849e912b-4c5d-4217-ba7d-557a56f42d29/Captura+de+pantalla+2026-02-27+a+las+10.32.04.png" + fmt,
+  CDN + "221462e9-5c23-4f28-a420-bcb3130a2b60/Captura+de+pantalla+2026-02-27+a+las+10.34.24.png" + fmt,
+];
+---
+
+<Layout title="Publicis Commerce — Agnès Mercadé">
+  <section class="project-detail">
+    <h1>Publicis Commerce</h1>
+    <div class="project-description">
+      <p>Adaptation to the Spanish market</p>
+      <p>
+        This project was developed as part of a UX/UI-focused module during my Master's Degree in
+        Digital Marketing. We created a strategy to bring Publicis Commerce closer to SMEs and
+        startups, translating its global proposition into a clear and relevant digital experience
+        for the Spanish market.
+      </p>
+
+      <p class="project-section-label">Analysis</p>
+      <ul>
+        <li>Lack of adaptability to different markets</li>
+        <li>Information is unclear in the explanation of services</li>
+        <li>The role of partners is not clearly defined</li>
+        <li>Limited usability in some sections (e.g., landing page, services)</li>
+      </ul>
+
+      <p class="project-section-label">Challenge</p>
+      <p>A global proposition that is too complex and not adapted to the reality of Spanish companies.</p>
+
+      <p class="project-section-label">Idea</p>
+      <ul>
+        <li>Create a local sub-identity with an accessible and approachable tone</li>
+        <li>Redesign the website architecture to explain services clearly</li>
+        <li>Improve the digital experience to generate leads and build trust</li>
+      </ul>
+    </div>
+
+    <div class="project-gallery cols-1">
+      {images.map(src => (
+        <img src={src} alt="" loading="lazy" />
+      ))}
+    </div>
+  </section>
+</Layout>

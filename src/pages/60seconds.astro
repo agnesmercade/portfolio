@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const CDN = "https://images.squarespace-cdn.com/content/v1/69788340c4a614347d63a918/";
+const thumb = CDN + "09f813f6-fb79-4450-bc3d-d95f4cd19031/Captura+de+pantalla+2026-02-02+a+las+11.17.38.png?format=1500w";
+---
+
+<Layout title="60 Seconds — Agnès Mercadé">
+  <section class="project-detail">
+    <h1>60 seconds</h1>
+    <div class="project-description">
+      <p>
+        60 seconds is a 60-second audiovisual piece created during my BA in Photography in London,
+        where the only requirement was its duration.
+      </p>
+      <p>
+        A rainy day on the Costa Brava unfolds through sound, rhythm, and shifting images, captured
+        from the interior of my home. Looking out at the landscape, I recorded small fragments of the
+        world outside as it changed with the rain, creating a quiet, continuous flow of images.
+      </p>
+      <p>
+        The piece is built from simple, observational clips, where rain, movement, and ambient sound
+        merge into a calm, immersive atmosphere. Each cut follows the rhythm of the audio, shaping a
+        slow visual cadence.
+      </p>
+      <p>
+        Rather than documenting a specific event, the work reflects a personal moment of stillness
+        and attention. The repetition of sound and image creates a suspended sense of time, where the
+        everyday becomes almost meditative.
+      </p>
+    </div>
+
+    <div class="project-gallery cols-1">
+      <img src={thumb} alt="60 seconds still" loading="lazy" />
+    </div>
+  </section>
+</Layout>

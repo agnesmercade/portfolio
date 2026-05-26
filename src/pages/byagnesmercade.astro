@@ -1,0 +1,69 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const CDN = "https://images.squarespace-cdn.com/content/v1/69788340c4a614347d63a918/";
+const fmt = "?format=1500w";
+
+const grids = [
+  CDN + "8598cb0c-46b7-402b-aeed-34b6bd3a0599/grid1_2026-05-21+a+las+19.22.34.png" + fmt,
+  CDN + "f6c6c0ec-b4f9-424c-ab36-09c7f9de06c4/grid+2_2026-05-21+a+las+19.24.38.png" + fmt,
+];
+---
+
+<Layout title="@by.agnesmercade — Agnès Mercadé">
+  <section class="project-detail">
+    <h1>@by.agnesmercade</h1>
+    <div class="project-description">
+      <p>
+        A visual diary on Instagram that functions as an exercise in visual curation, art direction,
+        and digital identity building, where I share photographs that reflect my personal observations
+        and creative process. The account brings together small details, moments of light, textures,
+        and everyday scenes that are part of my creative process.
+      </p>
+      <p>
+        This space works as an extension of my photographic practice and as an ongoing exploration
+        of the image within a digital environment. Through @by.agnesmercade, I share fragments of
+        everyday observations (places, light, architecture, and moments of calm found in daily life).
+      </p>
+      <p>
+        I approach the account both as a personal practice and as a carefully curated visual grid.
+        Each image is intentionally crafted so that it works on its own, while also contributing to
+        the rhythm, atmosphere, and continuity of the overall feed. The project combines spontaneous
+        captures with more thought-out compositions, from urban textures to domestic scenes, exploring
+        how light, colour, composition, and subtle details interact visually.
+      </p>
+      <p>
+        More recently, moving image has also become part of the project. Alongside photography, I have
+        started experimenting with short video sequences that capture atmosphere, movement, and everyday
+        observations. Through these fragments, I explore a different sense of rhythm and presence,
+        expanding the way the project translates personal experiences into visual form.
+      </p>
+      <p>
+        Rather than portraying the city as something overwhelming, I am interested in finding moments
+        of stillness, softness, and beauty within everyday urban environments. This sensibility is not
+        limited to urban settings but extends to all the environments I photograph or film, from natural
+        landscapes to more intimate or domestic scenes, with a consistent intention across my work.
+        Across both still and moving images, there is a clear purpose: to translate the way I observe
+        the world through calmness, subtlety, and atmosphere, and to communicate this way of seeing
+        to whoever is watching.
+      </p>
+      <p>
+        Beyond photography itself, the project has become a way of exploring creative direction through
+        sequencing, visual storytelling, and the relationship between images within a digital space.
+        It is a continuously evolving process, where I examine how images relate to one another through
+        aesthetics, coherence, and mood, developing a cohesive visual language over time that feels
+        both personal and intuitive.
+      </p>
+      <p>
+        This ongoing practice is an essential part of my work, helping me refine not only a way of
+        seeing, but also a growing interest in art direction and image-based storytelling.
+      </p>
+    </div>
+
+    <div class="project-gallery cols-1">
+      {grids.map(src => (
+        <img src={src} alt="" loading="lazy" />
+      ))}
+    </div>
+  </section>
+</Layout>
