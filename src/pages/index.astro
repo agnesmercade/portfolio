@@ -1,27 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const CDN = "https://images.squarespace-cdn.com/content/v1/69788340c4a614347d63a918/";
+import { asset } from '../utils/url';
 
 // 9 images matching the reference layout (mix of Santander + Echoes of Comfort)
 const images = [
-  { href: "/santander",         src: CDN + "4d7bb668-f145-4b96-b6e0-3f3c26fd59ba/A031342-R1-24-25A.jpg?format=2500w" },
-  { href: "/santander",         src: CDN + "84c7ec12-1543-4fe3-8dce-497006e57347/PICT3599.JPG?format=2500w" },
-  { href: "/santander",         src: CDN + "bae3124b-0f49-4d34-8a47-e46a7e73dcce/A031341-R1-07-9.jpg?format=2500w" },
-  { href: "/echoes-of-comfort", src: CDN + "1076f59d-8d65-41f2-94f3-8cbadf4ac880/llabiafinal-024.jpg?format=2500w" },
-  { href: "/santander",         src: CDN + "2f52eeb6-96d4-470c-b461-454ee1f0ae3b/A031341-R1-33-35.jpg?format=2500w" },
-  { href: "/santander",         src: CDN + "95c6f845-f667-4ae6-97df-21278a258fd1/PICT3600.JPG?format=2500w" },
-  { href: "/echoes-of-comfort", src: CDN + "6b385efd-0bdb-4f78-9074-1d28e2c0469d/llabiafinal-004.jpg?format=2500w" },
-  { href: "/echoes-of-comfort", src: CDN + "a2432303-900b-43b7-a383-006bbf200aa2/llabiafinal-002.jpg?format=2500w" },
-  { href: "/santander",         src: CDN + "8670b9b7-964d-451b-8ccc-4cefe8b63e3f/PICT3584.JPG?format=2500w" },
+  { href: asset('/santander'),         src: asset('/images/santander/carousel-1.jpg') },
+  { href: asset('/santander'),         src: asset('/images/santander/gallery-03.jpg') },
+  { href: asset('/santander'),         src: asset('/images/santander/gallery-08.jpg') },
+  { href: asset('/echoes-of-comfort'), src: asset('/images/echoes/03.jpg') },
+  { href: asset('/santander'),         src: asset('/images/santander/carousel-2.jpg') },
+  { href: asset('/santander'),         src: asset('/images/home/gallery-06.jpg') },
+  { href: asset('/echoes-of-comfort'), src: asset('/images/echoes/01.jpg') },
+  { href: asset('/echoes-of-comfort'), src: asset('/images/echoes/02.jpg') },
+  { href: asset('/santander'),         src: asset('/images/santander/gallery-04.jpg') },
 ];
 ---
 
 <Layout title="Agnès Mercadé">
   <section class="hero">
     <div class="hero-content">
-      <p class="hero-tagline">Creative. Intuitive. Intentional. Visual.</p>
-      <p class="hero-sub">Work across image, digital marketing and video.</p>
+      <p class="hero-tagline" data-i18n="home.tagline">Creative. Intuitive. Intentional. Visual.</p>
+      <p class="hero-sub" data-i18n="home.sub">Work across image, digital marketing and video.</p>
     </div>
   </section>
 
@@ -37,7 +36,7 @@ const images = [
 <style is:global>
   #homeGallery {
     background: #000;
-    padding: 0 var(--gutter);
+    padding: 0 var(--gutter) 6rem;
     /* Fallback column layout before JS */
     display: flex;
     flex-direction: column;

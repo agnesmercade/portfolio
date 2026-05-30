@@ -1,54 +1,199 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { asset } from '../utils/url';
 
-const CDN = "https://images.squarespace-cdn.com/content/v1/69788340c4a614347d63a918/";
-const fmt = "?format=1500w";
+// Top-right: wide desktop screenshot
+const imgWide      = asset('/images/publicis/wide.webp');
 
-const images = [
-  CDN + "16ca8c9e-382a-452f-a9f9-9106d19118e3/Captura+de+pantalla+2026-02-27+a+las+10.32.28.png" + fmt,
-  CDN + "fe075514-c916-4006-8921-528cd08006db/Captura+de+pantalla+2026-02-27+a+las+10.30.56.png" + fmt,
-  CDN + "1b9420c1-c139-439f-a8ce-b67b05888183/Captura+de+pantalla+2026-02-27+a+las+10.32.54.png" + fmt,
-  CDN + "a22dbde5-3344-4135-8ba8-e7df579eb3ad/Captura+de+pantalla+2026-03-14+a+las+19.32.15.png" + fmt,
-  CDN + "849e912b-4c5d-4217-ba7d-557a56f42d29/Captura+de+pantalla+2026-02-27+a+las+10.32.04.png" + fmt,
-  CDN + "221462e9-5c23-4f28-a420-bcb3130a2b60/Captura+de+pantalla+2026-02-27+a+las+10.34.24.png" + fmt,
-];
+// Middle row: left → center → right
+const imgMidLeft   = asset('/images/publicis/screen-mid-left.webp');
+const imgMidCenter = asset('/images/publicis/screen-mid-center.webp');
+const imgMidRight  = asset('/images/publicis/screen-mid-right.webp');
+
+// Bottom row: left + center (right third stays empty)
+const imgBotLeft   = asset('/images/publicis/screen-bot-left.webp');
+const imgBotCenter = asset('/images/publicis/screen-bot-center.webp');
 ---
 
 <Layout title="Publicis Commerce — Agnès Mercadé">
-  <section class="project-detail">
-    <h1>Publicis Commerce</h1>
-    <div class="project-description">
-      <p>Adaptation to the Spanish market</p>
-      <p>
-        This project was developed as part of a UX/UI-focused module during my Master's Degree in
-        Digital Marketing. We created a strategy to bring Publicis Commerce closer to SMEs and
-        startups, translating its global proposition into a clear and relevant digital experience
-        for the Spanish market.
-      </p>
+  <div class="pub-page">
 
-      <p class="project-section-label">Analysis</p>
-      <ul>
-        <li>Lack of adaptability to different markets</li>
-        <li>Information is unclear in the explanation of services</li>
-        <li>The role of partners is not clearly defined</li>
-        <li>Limited usability in some sections (e.g., landing page, services)</li>
-      </ul>
+    <!-- ── Top: text left │ wide screenshot + Idea right ── -->
+    <div class="pub-top">
 
-      <p class="project-section-label">Challenge</p>
-      <p>A global proposition that is too complex and not adapted to the reality of Spanish companies.</p>
+      <div class="pub-text">
+        <h1>Publicis Commerce</h1>
+        <h4 data-i18n="pub.subtitle">Adaptation to the Spanish market</h4>
+        <div class="pub-desc">
+          <p data-i18n="pub.p1">This project was developed as part of a UX/UI-focused module during my Master's Degree in Digital Marketing. We created a strategy to bring Publicis Commerce closer to SMEs and startups, translating its global proposition into a clear and relevant digital experience for the Spanish market.</p>
 
-      <p class="project-section-label">Idea</p>
-      <ul>
-        <li>Create a local sub-identity with an accessible and approachable tone</li>
-        <li>Redesign the website architecture to explain services clearly</li>
-        <li>Improve the digital experience to generate leads and build trust</li>
-      </ul>
+          <p class="pub-label" data-i18n="pub.label.analysis">Analysis</p>
+          <ul>
+            <li data-i18n="pub.analysis.1">Lack of adaptability to different markets</li>
+            <li data-i18n="pub.analysis.2">Information is unclear in the explanation of services</li>
+            <li data-i18n="pub.analysis.3">The role of partners is not clearly defined</li>
+            <li data-i18n="pub.analysis.4">Limited usability in some sections (e.g., landing page, services)</li>
+          </ul>
+
+          <p class="pub-label" data-i18n="pub.label.challenge">Challenge</p>
+          <p data-i18n="pub.challenge">A global proposition that is too complex and not adapted to the reality of Spanish companies.</p>
+
+          <p class="pub-label" data-i18n="pub.label.idea">Idea</p>
+          <ul>
+            <li data-i18n="pub.idea.1">Create a local sub-identity with an accessible and approachable tone</li>
+            <li data-i18n="pub.idea.2">Redesign the website architecture to explain services clearly</li>
+            <li data-i18n="pub.idea.3">Improve the digital experience to generate leads and build trust</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pub-right">
+        <img src={imgWide} alt="" loading="lazy" />
+      </div>
+
     </div>
 
-    <div class="project-gallery cols-1">
-      {images.map(src => (
-        <img src={src} alt="" loading="lazy" />
-      ))}
+    <!-- ── Middle: three equal portrait phone screenshots ── -->
+    <div class="pub-three">
+      <img src={imgMidLeft}   alt="" loading="lazy" />
+      <img src={imgMidCenter} alt="" loading="lazy" />
+      <img src={imgMidRight}  alt="" loading="lazy" />
     </div>
-  </section>
+
+    <!-- ── Bottom: two screenshots; right third left empty ── -->
+    <div class="pub-bottom">
+      <img src={imgBotLeft}   alt="" loading="lazy" />
+      <img src={imgBotCenter} alt="" loading="lazy" />
+    </div>
+
+  </div>
 </Layout>
+
+<style>
+  .pub-page {
+    padding: calc(var(--nav-height) + 3rem) var(--gutter) 6rem;
+    max-width: var(--site-max);
+    margin: 0 auto;
+  }
+
+  /* ── Top section ── */
+  .pub-top {
+    display: grid;
+    grid-template-columns: 10fr 12fr;
+    gap: 4vw;
+    align-items: start;
+    margin-bottom: 4rem;
+  }
+
+  .pub-text h1 {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.75rem;
+    color: var(--white);
+  }
+
+  .pub-text h4 {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    font-weight: 400;
+    margin-bottom: 2rem;
+  }
+
+  .pub-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--gray);
+  }
+
+  .pub-desc p + p { margin-top: 1rem; }
+
+  .pub-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    font-weight: 400;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .pub-desc ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .pub-desc ul li {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--gray);
+    padding-left: 1.25em;
+    position: relative;
+  }
+
+  .pub-desc ul li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    opacity: 0.5;
+  }
+
+  /* Right panel */
+  .pub-right > img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ── Middle: three equal columns ── */
+  .pub-three {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 11px;
+    margin-bottom: 11px;
+    align-items: start;
+  }
+
+  .pub-three img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ── Bottom: two images in first two of three equal columns ── */
+  .pub-bottom {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 11px;
+    align-items: start;
+  }
+
+  .pub-bottom img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 767px) {
+    .pub-top {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .pub-three {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .pub-bottom {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+  }
+</style>

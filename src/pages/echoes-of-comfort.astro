@@ -1,49 +1,119 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const CDN = "https://images.squarespace-cdn.com/content/v1/69788340c4a614347d63a918/";
-const fmt = "?format=1500w";
+import { asset } from '../utils/url';
 
 const images = [
-  CDN + "6b385efd-0bdb-4f78-9074-1d28e2c0469d/llabiafinal-004.jpg" + fmt,
-  CDN + "a2432303-900b-43b7-a383-006bbf200aa2/llabiafinal-002.jpg" + fmt,
-  CDN + "1076f59d-8d65-41f2-94f3-8cbadf4ac880/llabiafinal-024.jpg" + fmt,
-  CDN + "6a5d62a1-753c-4b39-b618-bfea05f8a376/llabiafinal-021.jpg" + fmt,
-  CDN + "b09eb36b-2951-4d1f-a4c9-48d67027dbfe/llabiafinal-006.jpg" + fmt,
-  CDN + "9ab0e4ae-6ebd-47d3-954e-075a5e05cf6d/llabiafinal-003.jpg" + fmt,
-  CDN + "e8bd4a3a-e834-47a1-8951-1a8c47ce5126/llabiafinal-028.jpg" + fmt,
-  CDN + "b1bd2fad-028d-47d8-a884-9e6c74c29d3f/llabiafinal-005.jpg" + fmt,
+  { src: asset('/images/echoes/01.jpg'), w: 3550, h: 5280 },
+  { src: asset('/images/echoes/02.jpg'), w: 5280, h: 3546 },
+  { src: asset('/images/echoes/03.jpg'), w: 3562, h: 5280 },
+  { src: asset('/images/echoes/04.jpg'), w: 5280, h: 3572 },
+  { src: asset('/images/echoes/05.jpg'), w: 5280, h: 3547 },
+  { src: asset('/images/echoes/06.jpg'), w: 3542, h: 5280 },
+  { src: asset('/images/echoes/07.jpg'), w: 5280, h: 3568 },
+  { src: asset('/images/echoes/08.jpg'), w: 5280, h: 3525 },
 ];
 ---
 
 <Layout title="Echoes of Comfort — Agnès Mercadé">
-  <section class="project-detail">
+
+  <section class="project-detail eoc-detail">
     <h1>Echoes of Comfort</h1>
     <div class="project-description">
-      <p>This project was developed as my final year major project during my BA in Photography.</p>
-      <p>
+      <p data-i18n="eoc.p1">This project was developed as my final year major project during my BA in Photography.</p>
+      <p data-i18n="eoc.p2">
         It was born from a desire to express a sense of nostalgia, peacefulness, and happiness
         that I feel when I am in the places photographed. It is a reminiscence of the open,
         vibrant fields I have grown up with and been surrounded by throughout my life, translated
         into images that feel warm, homely, and serene.
       </p>
-      <p>
+      <p data-i18n="eoc.p3">
         Through this work, I explore quieter, yet equally captivating, rural landscapes, offering
         a slower and more intimate perspective of Spain, a country often associated with its vibrant
         and active cities.
       </p>
-      <p>
+      <p data-i18n="eoc.p4">
         The title suggests a subtle connection between place and memory, reflecting the blend of
         coastal and rural landscapes of the Costa Brava in northeastern Spain, where the work was
         photographed. There are no literal echoes, but a lingering sense of reminiscence shaped by
         familiarity and comfort in these surroundings.
       </p>
     </div>
+  </section>
 
-    <div class="project-gallery cols-1">
-      {images.map(src => (
-        <img src={src} alt="" loading="lazy" />
+  <!-- outer div carries the padding; inner div is the masonry canvas -->
+  <div class="eoc-outer">
+    <div class="eoc-masonry" id="eocMasonry">
+      {images.map(({ src, w, h }) => (
+        <img src={src} alt="" loading="lazy" width={w} height={h} />
       ))}
     </div>
-  </section>
+  </div>
+
 </Layout>
+
+<style>
+  .eoc-detail {
+    padding-bottom: 0;
+  }
+
+  .eoc-outer {
+    padding: 3rem 4vw 6rem;
+  }
+
+  /* position: relative canvas; JS sets absolute positions + explicit height */
+  .eoc-masonry {
+    position: relative;
+  }
+
+  .eoc-masonry img {
+    position: absolute;
+    display: block;
+    /* width + top + left set by JS */
+  }
+</style>
+
+<script>
+  const GAP = 25;
+  const container = document.getElementById('eocMasonry')!;
+  const imgs = Array.from(container.querySelectorAll('img')) as HTMLImageElement[];
+
+  function numCols(): number {
+    if (window.innerWidth <= 560) return 1;
+    if (window.innerWidth <= 900) return 2;
+    return 3;
+  }
+
+  function layout() {
+    const n      = numCols();
+    const totalW = container.offsetWidth;
+    const colW   = (totalW - (n - 1) * GAP) / n;
+
+    const tops   = new Array<number>(n).fill(0);
+    const lefts  = Array.from({ length: n }, (_, i) => i * (colW + GAP));
+
+    imgs.forEach(img => {
+      const iw = parseInt(img.getAttribute('width')!);
+      const ih = parseInt(img.getAttribute('height')!);
+      const imgH = colW * (ih / iw);
+
+      // shortest-column placement
+      let col = 0;
+      for (let i = 1; i < n; i++) {
+        if (tops[i] < tops[col]) col = i;
+      }
+
+      img.style.width  = colW + 'px';
+      img.style.height = imgH + 'px';
+      img.style.left   = lefts[col] + 'px';
+      img.style.top    = tops[col]  + 'px';
+
+      tops[col] += imgH + GAP;
+    });
+
+    // set canvas height so the outer div knows how tall to be
+    container.style.height = (Math.max(...tops) - GAP) + 'px';
+  }
+
+  layout();
+  window.addEventListener('resize', layout, { passive: true });
+</script>

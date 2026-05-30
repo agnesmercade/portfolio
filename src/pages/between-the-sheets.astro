@@ -1,42 +1,120 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { asset } from '../utils/url';
 
-const CDN = "https://images.squarespace-cdn.com/content/v1/69788340c4a614347d63a918/";
-const fmt = "?format=1500w";
+// Top-right: wide landscape screenshot
+const imgWide = asset('/images/between/wide.webp');
 
-const images = [
-  CDN + "98ce9fbb-1bc0-46da-b8b8-79a779edb7f5/Captura+de+pantalla+2026-03-14+a+las+19.24.00.png" + fmt,
-  CDN + "a6f6a088-738a-4366-b681-a635e2dea399/tempImageaAH5Pi.jpg" + fmt,
-  CDN + "d083bb65-91a4-4173-91c8-d819a00fec1d/tempImageC5Bpwl.jpg" + fmt,
-  CDN + "c34724c6-f947-4789-8fab-c1e68cf10eed/tempImagebugiGK.jpg" + fmt,
-  CDN + "98cbeb00-fadc-4278-9fd5-b523aca42cc4/IMG_0585.JPG" + fmt,
-  CDN + "17b326c2-db1e-491f-9b88-5879203bb4af/IMG_0590.JPG" + fmt,
-  CDN + "061bdea0-4d1b-4146-a25a-2d04dee32b9e/IMG_0587.JPG" + fmt,
+// Gallery: two rows of three portrait images
+const row1 = [
+  asset('/images/between/photo-1.jpg'),
+  asset('/images/between/photo-2.jpg'),
+  asset('/images/between/photo-3.jpg'),
+];
+const row2 = [
+  asset('/images/between/photo-4.jpg'),
+  asset('/images/between/photo-5.jpg'),
+  asset('/images/between/photo-6.jpg'),
 ];
 ---
 
 <Layout title="Between the Sheets — Agnès Mercadé">
-  <section class="project-detail">
-    <h1>Between the Sheets</h1>
-    <div class="project-description">
-      <p>An ongoing photographic series set within Barcelona's interior courtyards.</p>
-      <p>
-        Through laundry lines, moving fabrics, and shifting light, the images capture quiet traces
-        of everyday life hidden inside the city's blocks. The series explores the subtle rhythms
-        of these spaces, where architecture, light, and domestic details shape an intimate atmosphere.
-      </p>
-      <p>
-        Between hanging sheets, moving fabrics, and shifting light, the images linger on quiet traces
-        of everyday life — glimpsed rather than seen — inside the city's blocks. The series explores
-        the subtle rhythms of these spaces, where architecture, light, and domestic details create an
-        intimate, almost private atmosphere.
-      </p>
+  <div class="bts-page">
+
+    <!-- ── Top: text left │ wide screenshot right ── -->
+    <div class="bts-top">
+      <div class="bts-text">
+        <h1>Between the sheets</h1>
+        <div class="bts-desc">
+          <p data-i18n="bts.p1">An ongoing photographic series set within Barcelona's interior courtyards.</p>
+          <p data-i18n="bts.p2">Through laundry lines, hanging sheets, and shifting light, the images linger on quiet traces of everyday life hidden inside the city's blocks. The series explores the subtle rhythms of these spaces where architecture, light, and domestic details create an intimate, almost private atmosphere.</p>
+        </div>
+      </div>
+      <div class="bts-screenshot">
+        <img src={imgWide} alt="" loading="lazy" />
+      </div>
     </div>
 
-    <div class="project-gallery cols-1">
-      {images.map(src => (
+    <!-- ── Gallery: 3-column, 2 rows ── -->
+    <div class="bts-gallery">
+      {[...row1, ...row2].map(src => (
         <img src={src} alt="" loading="lazy" />
       ))}
     </div>
-  </section>
+
+  </div>
 </Layout>
+
+<style>
+  .bts-page {
+    padding: calc(var(--nav-height) + 3rem) var(--gutter) 6rem;
+    max-width: var(--site-max);
+    margin: 0 auto;
+  }
+
+  /* ── Top section: text left, screenshot right ── */
+  .bts-top {
+    display: grid;
+    grid-template-columns: 11fr 12fr;
+    gap: 4vw;
+    align-items: start;
+    margin-bottom: 6rem;
+  }
+
+  .bts-text h1 {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    margin-bottom: 2rem;
+    color: var(--white);
+  }
+
+  .bts-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--gray);
+  }
+
+  .bts-desc p + p { margin-top: 1rem; }
+
+  /* Screenshot pushed down to align below the h1 */
+  .bts-screenshot {
+    padding-top: 4rem;
+  }
+
+  .bts-screenshot img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ── Gallery: 3 equal columns, 11px gap ── */
+  .bts-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: min(4vw, 64px);
+    align-items: start;
+  }
+
+  .bts-gallery img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 767px) {
+    .bts-top {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .bts-screenshot { padding-top: 0; }
+
+    .bts-gallery {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+  }
+</style>

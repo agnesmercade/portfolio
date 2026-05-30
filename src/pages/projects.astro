@@ -1,49 +1,54 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const CDN = "https://images.squarespace-cdn.com/content/v1/69788340c4a614347d63a918/";
+import { asset } from '../utils/url';
 
 const projects = [
   {
     title: "01_Santander",
     discipline: "photo",
-    href: "/santander",
-    thumb: CDN + "4d7bb668-f145-4b96-b6e0-3f3c26fd59ba/A031342-R1-24-25A.jpg?format=2500w",
+    discKey: "disc.photo",
+    href: asset('/santander'),
+    thumb: asset('/images/santander/carousel-1.jpg'),
   },
   {
     title: "02_@by.agnesmercade",
     discipline: "hybrid",
-    href: "/byagnesmercade",
-    thumb: CDN + "8598cb0c-46b7-402b-aeed-34b6bd3a0599/grid1_2026-05-21+a+las+19.22.34.png?format=2500w",
+    discKey: "disc.hybrid",
+    href: asset('/byagnesmercade'),
+    thumb: asset('/images/byagnes/grid-1.webp'),
   },
   {
     title: "03_Echoes of Comfort",
     discipline: "photo",
-    href: "/echoes-of-comfort",
-    thumb: CDN + "a2432303-900b-43b7-a383-006bbf200aa2/llabiafinal-002.jpg?format=2500w",
+    discKey: "disc.photo",
+    href: asset('/echoes-of-comfort'),
+    thumb: asset('/images/echoes/02.jpg'),
   },
   {
     title: "04_Publicis Commerce",
     discipline: "digital marketing",
-    href: "/publicis-commerce",
-    thumb: CDN + "26dd7b14-0973-4d42-b84e-ebdfeb81fe99/publicis_commerce-80.jpg?format=2500w",
+    discKey: "disc.digital",
+    href: asset('/publicis-commerce'),
+    thumb: asset('/images/projects/thumb-publicis.jpg'),
   },
   {
     title: "05_60 Seconds",
     discipline: "video",
-    href: "/60seconds",
-    thumb: CDN + "09f813f6-fb79-4450-bc3d-d95f4cd19031/Captura+de+pantalla+2026-02-02+a+las+11.17.38.png?format=2500w",
+    discKey: "disc.video",
+    href: asset('/60seconds'),
+    thumb: asset('/images/projects/thumb-60seconds.webp'),
   },
   {
     title: "06_Between the Sheets",
     discipline: "photo",
-    href: "/between-the-sheets",
-    thumb: CDN + "fd998fb6-7d1c-4069-af94-947fe409efd0/Captura+de+pantalla+2026-03-14+a+las+19.24.00.png?format=2500w",
+    discKey: "disc.photo",
+    href: asset('/between-the-sheets'),
+    thumb: asset('/images/projects/thumb-between.webp'),
   },
 ];
 ---
 
-<Layout title="Projects — Agnès Mercadé">
+<Layout title="Projects — Agnès Mercadé" titleKey="title.projects">
   <section class="projects-index">
     <div class="projects-index-bg" id="projectsBg"></div>
     <ul class="projects-stack">
@@ -54,7 +59,7 @@ const projects = [
             class="project-stack-link"
             data-thumb={p.thumb}
           >
-            {p.title}<span class="project-discipline"> — {p.discipline}</span>
+            {p.title}<span class="project-discipline" data-i18n={p.discKey}> — {p.discipline}</span>
           </a>
         </li>
       ))}

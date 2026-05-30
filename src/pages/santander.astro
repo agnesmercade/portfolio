@@ -1,39 +1,37 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const CDN = "https://images.squarespace-cdn.com/content/v1/69788340c4a614347d63a918/";
-const fmt = "?format=1500w";
+import { asset } from '../utils/url';
 
 const slides = [
-  CDN + "4d7bb668-f145-4b96-b6e0-3f3c26fd59ba/A031342-R1-24-25A.jpg" + fmt,
-  CDN + "2f52eeb6-96d4-470c-b461-454ee1f0ae3b/A031341-R1-33-35.jpg" + fmt,
-  CDN + "29b4c846-f2c9-4e1a-af96-5fc9c6bdc2be/A031342-R1-22-23A.jpg" + fmt,
-  CDN + "b2199425-a88e-493e-b541-44bad06d042f/A031341-R1-29-31.jpg" + fmt,
+  asset('/images/santander/carousel-1.jpg'),
+  asset('/images/santander/carousel-2.jpg'),
+  asset('/images/santander/carousel-3.jpg'),
+  asset('/images/santander/carousel-4.jpg'),
 ];
 
 const row1 = [
-  CDN + "aabf6805-5eb6-4587-b12a-e59ce93a37aa/PICT3598.JPG" + fmt,
-  CDN + "1769513330379-CSD5MR0AA0HMST8URNKD/PICT3602.png" + fmt,
-  CDN + "84c7ec12-1543-4fe3-8dce-497006e57347/PICT3599.JPG" + fmt,
-  CDN + "8670b9b7-964d-451b-8ccc-4cefe8b63e3f/PICT3584.JPG" + fmt,
+  asset('/images/santander/gallery-01.jpg'),
+  asset('/images/santander/gallery-02.jpg'),
+  asset('/images/santander/gallery-03.jpg'),
+  asset('/images/santander/gallery-04.jpg'),
 ];
 
 const row2 = [
-  CDN + "85d2bc91-f931-4375-95b6-57298e509576/PICT3590.JPG" + fmt,
-  CDN + "6ba49bfd-b5ef-4865-b71b-8a4a03a6af2b/PICT3592.JPG" + fmt,
-  CDN + "73b80f2e-78c9-4c75-b692-487afe1204e0/PICT3593.JPG" + fmt,
-  CDN + "bae3124b-0f49-4d34-8a47-e46a7e73dcce/A031341-R1-07-9.jpg" + fmt,
+  asset('/images/santander/gallery-05.jpg'),
+  asset('/images/santander/gallery-06.jpg'),
+  asset('/images/santander/gallery-07.jpg'),
+  asset('/images/santander/gallery-08.jpg'),
 ];
 
 const row3 = [
-  CDN + "cbdd75a5-30ef-46ef-b158-ae7f4f40b1f3/A031341-R1-18-20.jpg" + fmt,
-  CDN + "35e747f1-38d1-41f2-bc99-79d5d5939d8c/A031341-R1-08-10.jpg" + fmt,
-  CDN + "00779f14-7a33-42ce-abe8-58a6d93aad3f/A031341-R1-35-37.jpg" + fmt,
+  asset('/images/santander/gallery-09.jpg'),
+  asset('/images/santander/gallery-10.jpg'),
+  asset('/images/santander/gallery-11.jpg'),
 ];
 
 const row4 = [
-  CDN + "4cd565cd-de33-4217-8148-2a8114dda8ba/PICT3597.JPG" + fmt,
-  CDN + "5e6b6c58-352f-4f54-b6f9-7f8b176b0b51/PICT3604.JPG" + fmt,
+  asset('/images/santander/gallery-12.jpg'),
+  asset('/images/santander/gallery-13.jpg'),
 ];
 ---
 
@@ -72,17 +70,17 @@ const row4 = [
   <section class="project-detail san-detail">
     <h1>Santander</h1>
     <div class="project-description">
-      <p>A personal project shot on 35mm film in Santander, combining color and black and white.</p>
-      <p>
+      <p data-i18n="san.p1">A personal project shot on 35mm film in Santander, combining color and black and white.</p>
+      <p data-i18n="san.p2">
         The black and white images come from an intentional experiment during development: the film
         was treated as if it had been shot at a lower ISO, pushing contrast and density further.
         The result is a more graphic and defined look, where light and shadow take the lead.
       </p>
-      <p>
+      <p data-i18n="san.p3">
         Color photographs work differently, paying attention to subtle shifts in light, atmosphere,
         and balance within the frame.
       </p>
-      <p>
+      <p data-i18n="san.p4">
         Across both formats, the project is driven by visual intuition and a strong sense of
         composition, rather than a fixed narrative.
       </p>

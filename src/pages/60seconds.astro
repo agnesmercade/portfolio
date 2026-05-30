@@ -1,37 +1,81 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const CDN = "https://images.squarespace-cdn.com/content/v1/69788340c4a614347d63a918/";
-const thumb = CDN + "09f813f6-fb79-4450-bc3d-d95f4cd19031/Captura+de+pantalla+2026-02-02+a+las+11.17.38.png?format=1500w";
 ---
 
 <Layout title="60 Seconds — Agnès Mercadé">
-  <section class="project-detail">
-    <h1>60 seconds</h1>
-    <div class="project-description">
-      <p>
-        60 seconds is a 60-second audiovisual piece created during my BA in Photography in London,
-        where the only requirement was its duration.
-      </p>
-      <p>
-        A rainy day on the Costa Brava unfolds through sound, rhythm, and shifting images, captured
-        from the interior of my home. Looking out at the landscape, I recorded small fragments of the
-        world outside as it changed with the rain, creating a quiet, continuous flow of images.
-      </p>
-      <p>
-        The piece is built from simple, observational clips, where rain, movement, and ambient sound
-        merge into a calm, immersive atmosphere. Each cut follows the rhythm of the audio, shaping a
-        slow visual cadence.
-      </p>
-      <p>
-        Rather than documenting a specific event, the work reflects a personal moment of stillness
-        and attention. The repetition of sound and image creates a suspended sense of time, where the
-        everyday becomes almost meditative.
-      </p>
+  <div class="secs-page">
+
+    <h1 class="secs-title">60 seconds</h1>
+
+    <div class="secs-video">
+      <iframe
+        src="https://www.youtube.com/embed/stwBYIIKDeM"
+        title="60 seconds"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
     </div>
 
-    <div class="project-gallery cols-1">
-      <img src={thumb} alt="60 seconds still" loading="lazy" />
+    <div class="secs-desc">
+      <p data-i18n="secs.p1">60 seconds is a 60-second audiovisual piece created during my BA in Photography in London, where the only requirement was its duration.</p>
+      <p data-i18n="secs.p2">A rainy day on the Costa Brava unfolds through sound, rhythm, and shifting images, captured from the interior of my home. Looking out at the landscape, I recorded small fragments of the world outside as it changed with the rain, creating a quiet, continuous flow of images.</p>
+      <p data-i18n="secs.p3">The piece is built from simple, observational clips, where rain, movement, and ambient sound merge into a calm, immersive atmosphere. Each cut follows the rhythm of the audio, shaping a slow visual cadence.</p>
+      <p data-i18n="secs.p4">Rather than documenting a specific event, the work reflects a personal moment of stillness and attention. The repetition of sound and image creates a suspended sense of time, where the everyday becomes almost meditative.</p>
     </div>
-  </section>
+
+  </div>
 </Layout>
+
+<style>
+  .secs-page {
+    padding: calc(var(--nav-height) + 3rem) var(--gutter) 6rem;
+    max-width: var(--site-max);
+    margin: 0 auto;
+  }
+
+  .secs-title {
+    font-size: clamp(48px, 8vw, 120px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  /* ── Video: centered, 70% wide, responsive 16:9 ── */
+  .secs-video {
+    position: relative;
+    width: 70%;
+    margin: 0 auto 3rem;
+    padding-bottom: calc(70% * 9 / 16);
+    height: 0;
+  }
+
+  .secs-video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* ── Description: centered, readable width ── */
+  .secs-desc {
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--gray);
+    text-align: left;
+  }
+
+  .secs-desc p + p { margin-top: 1rem; }
+
+  @media (max-width: 767px) {
+    .secs-video {
+      width: 100%;
+      padding-bottom: 56.25%;
+    }
+  }
+</style>

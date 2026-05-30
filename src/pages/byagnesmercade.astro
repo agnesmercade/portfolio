@@ -1,69 +1,301 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const CDN = "https://images.squarespace-cdn.com/content/v1/69788340c4a614347d63a918/";
-const fmt = "?format=1500w";
+import { asset } from '../utils/url';
 
 const grids = [
-  CDN + "8598cb0c-46b7-402b-aeed-34b6bd3a0599/grid1_2026-05-21+a+las+19.22.34.png" + fmt,
-  CDN + "f6c6c0ec-b4f9-424c-ab36-09c7f9de06c4/grid+2_2026-05-21+a+las+19.24.38.png" + fmt,
+  asset('/images/byagnes/grid-1.webp'),
+  asset('/images/byagnes/grid-2.webp'),
 ];
+
+const slides = [
+  { src: asset('/images/byagnes/slide-01.webp'),    caption: "_" },
+  { src: asset('/images/byagnes/slide-02.jpg'),     caption: "_" },
+  { src: asset('/images/byagnes/slide-03.webp'),    caption: "_" },
+  { src: asset('/images/between/photo-4.jpg'),      caption: "_" },
+  { src: asset('/images/between/photo-5.jpg'),      caption: "_" },
+  { src: asset('/images/between/photo-6.jpg'),      caption: "_" },
+  { src: asset('/images/between/photo-1.jpg'),      caption: "_" },
+  { src: asset('/images/between/photo-2.jpg'),      caption: "_" },
+  { src: asset('/images/between/photo-3.jpg'),      caption: "_" },
+  { src: asset('/images/byagnes/slide-10.jpg'),     caption: "santander" },
+  { src: asset('/images/byagnes/slide-11.jpg'),     caption: "turó park" },
+  { src: asset('/images/byagnes/slide-12.jpg'),     caption: "tenor viñas" },
+  { src: asset('/images/byagnes/slide-13.jpg'),     caption: "echoes of comfort" },
+  { src: asset('/images/byagnes/slide-14.jpg'),     caption: "_" },
+  { src: asset('/images/byagnes/slide-15.jpg'),     caption: "mas de torrent" },
+  { src: asset('/images/byagnes/slide-16.jpg'),     caption: "_" },
+  { src: asset('/images/byagnes/slide-17.jpg'),     caption: "girasoles" },
+  { src: asset('/images/byagnes/slide-18.webp'),    caption: "_" },
+];
+
+const numClones = 4;
+const realCount = slides.length; // 18
 ---
 
 <Layout title="@by.agnesmercade — Agnès Mercadé">
-  <section class="project-detail">
-    <h1>@by.agnesmercade</h1>
-    <div class="project-description">
-      <p>
-        A visual diary on Instagram that functions as an exercise in visual curation, art direction,
-        and digital identity building, where I share photographs that reflect my personal observations
-        and creative process. The account brings together small details, moments of light, textures,
-        and everyday scenes that are part of my creative process.
-      </p>
-      <p>
-        This space works as an extension of my photographic practice and as an ongoing exploration
-        of the image within a digital environment. Through @by.agnesmercade, I share fragments of
-        everyday observations (places, light, architecture, and moments of calm found in daily life).
-      </p>
-      <p>
-        I approach the account both as a personal practice and as a carefully curated visual grid.
-        Each image is intentionally crafted so that it works on its own, while also contributing to
-        the rhythm, atmosphere, and continuity of the overall feed. The project combines spontaneous
-        captures with more thought-out compositions, from urban textures to domestic scenes, exploring
-        how light, colour, composition, and subtle details interact visually.
-      </p>
-      <p>
-        More recently, moving image has also become part of the project. Alongside photography, I have
-        started experimenting with short video sequences that capture atmosphere, movement, and everyday
-        observations. Through these fragments, I explore a different sense of rhythm and presence,
-        expanding the way the project translates personal experiences into visual form.
-      </p>
-      <p>
-        Rather than portraying the city as something overwhelming, I am interested in finding moments
-        of stillness, softness, and beauty within everyday urban environments. This sensibility is not
-        limited to urban settings but extends to all the environments I photograph or film, from natural
-        landscapes to more intimate or domestic scenes, with a consistent intention across my work.
-        Across both still and moving images, there is a clear purpose: to translate the way I observe
-        the world through calmness, subtlety, and atmosphere, and to communicate this way of seeing
-        to whoever is watching.
-      </p>
-      <p>
-        Beyond photography itself, the project has become a way of exploring creative direction through
-        sequencing, visual storytelling, and the relationship between images within a digital space.
-        It is a continuously evolving process, where I examine how images relate to one another through
-        aesthetics, coherence, and mood, developing a cohesive visual language over time that feels
-        both personal and intuitive.
-      </p>
-      <p>
-        This ongoing practice is an essential part of my work, helping me refine not only a way of
-        seeing, but also a growing interest in art direction and image-based storytelling.
-      </p>
-    </div>
 
-    <div class="project-gallery cols-1">
-      {grids.map(src => (
-        <img src={src} alt="" loading="lazy" />
-      ))}
+  <!-- ── Two-column: text left, grid screenshots right ── -->
+  <section class="bam-section">
+    <h1 class="bam-title">@by.agnesmercade</h1>
+    <div class="bam-cols">
+
+      <div class="bam-text">
+        <div class="bam-desc">
+          <p data-i18n="bam.p1">A visual diary on Instagram that functions as an exercise in <strong>visual curation, art direction, and digital identity building</strong>, where I share photographs that reflect my personal observations. Through <strong>@by.agnesmercade</strong>, I share photographs and moving images that emerge from <strong>own impressions</strong> (fragments of small details, light, textures, architecture, landscapes and calm found in everyday scenes) that are part of my creative process.</p>
+          <p data-i18n="bam.p2">This space works as an extension of my photographic practice and as an ongoing exploration of the image within a digital environment. I approach the account <strong>both as a personal practice and as a carefully curated visual grid</strong>, where each image is intentionally crafted so that it works on its own while also contributing to the <strong>rhythm, atmosphere, and continuity</strong> of the overall feed.</p>
+          <p data-i18n="bam.p3">The project combines spontaneous captures with more thought-out compositions, from urban textures to domestic scenes, exploring how light, colour, composition, and subtle details interact visually. More recently, <strong>video</strong> has also become an important part of the project through experimenting with short sequences that capture <strong>atmosphere, movement, and everyday fragments</strong>. Through these, I explore a different sense of <strong>rhythm and presence</strong>, expanding the way the project translates personal experiences into visual form.</p>
+          <p data-i18n="bam.p4">Rather than portraying the city as something overwhelming, I am interested in finding moments of <strong>stillness, softness, and beauty</strong> within urban environments. Also, this sensibility is not limited to urban settings but extends to all the environments I <strong>photograph or film</strong>, from natural landscapes to more intimate or domestic scenes, with a consistent intention across my work. There is a clear purpose: to translate the way I observe the world through <strong>calmness and subtlety</strong>, and to communicate this way of seeing to the viewer.</p>
+          <p data-i18n="bam.p5">Beyond photography itself, the project has become a way of exploring <strong>creative direction</strong> through sequencing, visual storytelling, and the relationship between images within a digital space. It is a <strong>continuously evolving process,</strong> where I examine how images relate to one another through aesthetics, coherence, and mood, developing a <strong>cohesive visual language</strong> over time that feels both personal and intuitive. It is an essential part of my work, and has helped me refine not only a way of seeing, but also a growing interest in <strong>art direction and image-based storytelling</strong>.</p>
+        </div>
+      </div>
+
+      <div class="bam-grids">
+        {grids.map(src => (
+          <img src={src} alt="" loading="lazy" />
+        ))}
+      </div>
+
     </div>
   </section>
+
+  <!-- ── Polaroid carousel ── -->
+  <div class="bam-carousel-wrap">
+    <div class="bam-reel" id="bamReel">
+      <div class="bam-track" id="bamTrack">
+        <!-- 4 clones at start (last 4 real slides) -->
+        {slides.slice(-numClones).map(({ src, caption }) => (
+          <div class="bam-card">
+            <img class="bam-card-img" src={src} alt="" />
+            <span class="bam-card-caption">{caption}</span>
+          </div>
+        ))}
+        <!-- real slides -->
+        {slides.map(({ src, caption }) => (
+          <div class="bam-card">
+            <img class="bam-card-img" src={src} alt="" loading="lazy" />
+            <span class="bam-card-caption">{caption}</span>
+          </div>
+        ))}
+        <!-- 4 clones at end (first 4 real slides) -->
+        {slides.slice(0, numClones).map(({ src, caption }) => (
+          <div class="bam-card">
+            <img class="bam-card-img" src={src} alt="" loading="lazy" />
+            <span class="bam-card-caption">{caption}</span>
+          </div>
+        ))}
+      </div>
+      <button class="bam-btn bam-prev" id="bamPrev" aria-label="Previous">&#8249;</button>
+      <button class="bam-btn bam-next" id="bamNext" aria-label="Next">&#8250;</button>
+    </div>
+  </div>
+
 </Layout>
+
+<style>
+  /* ── Two-column section ── */
+  .bam-section {
+    padding: calc(var(--nav-height) + 3rem) var(--gutter) 0;
+    max-width: var(--site-max);
+    margin: 0 auto;
+  }
+
+  .bam-cols {
+    display: flex;
+    gap: 4vw;
+    align-items: flex-start;
+  }
+
+  .bam-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .bam-title {
+    font-size: clamp(26px, 3.5vw, 44px);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    margin-bottom: 2.5rem;
+    color: var(--white);
+  }
+
+  .bam-desc {
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--gray);
+  }
+
+  .bam-desc p + p {
+    margin-top: 1.25rem;
+  }
+
+  .bam-desc strong {
+    color: rgba(255, 255, 255, 0.72);
+    font-weight: 700;
+  }
+
+  /* ── Right-hand grid screenshots ── */
+  .bam-grids {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-self: flex-start;
+  }
+
+  .bam-grids img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ── Polaroid carousel wrapper ── */
+  .bam-carousel-wrap {
+    padding: 4vw 0 6rem;
+  }
+
+  .bam-reel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .bam-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease;
+    will-change: transform;
+  }
+
+  /* ── Polaroid card ── */
+  .bam-card {
+    flex-shrink: 0;
+    background: #fff;
+    padding: 18px 18px 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    /* width set by JS */
+  }
+
+  .bam-card-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+
+  .bam-card-caption {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── Arrow buttons ── */
+  .bam-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
+    color: #fff;
+    font-size: 2.5rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0.5rem 1.1rem;
+    z-index: 10;
+    transition: background 0.2s;
+  }
+  .bam-btn:hover { background: rgba(0, 0, 0, 0.6); }
+  .bam-prev { left: 0; }
+  .bam-next { right: 0; }
+
+  /* ── Mobile ── */
+  @media (max-width: 767px) {
+    .bam-cols {
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+    .bam-grids {
+      width: 100%;
+      order: 2;
+    }
+    .bam-text h1 {
+      margin-bottom: 1.5rem;
+    }
+  }
+</style>
+
+<script define:vars={{ numClones, realCount }}>
+  const reel  = document.getElementById('bamReel');
+  const track = document.getElementById('bamTrack');
+
+  const GAP  = 20; // px — matches CSS gap: 20px on .bam-track
+  const PEEK = 40; // px of adjacent card visible on each side
+
+  let idx  = numClones; // start at first real slide
+  let busy = false;
+
+  function getN() {
+    const w = window.innerWidth;
+    if (w < 600)  return 1;
+    if (w < 900)  return 2;
+    return 4;
+  }
+
+  function computeSlideW() {
+    const N = getN();
+    // reelW = N*sw + (N+1)*GAP + 2*PEEK  →  solve for sw
+    return (reel.offsetWidth - (getN() + 1) * GAP - 2 * PEEK) / getN();
+  }
+
+  function updateSlideWidths() {
+    const sw = computeSlideW();
+    Array.from(track.children).forEach(c => { c.style.width = sw + 'px'; });
+  }
+
+  // posFor: translateX so slide n is PEEK+GAP from the left of the reel,
+  // leaving PEEK px of the previous slide peeking on the left.
+  function posFor(n) {
+    const sw = computeSlideW();
+    return PEEK + GAP - n * (sw + GAP);
+  }
+
+  function slideTo(n) {
+    if (busy) return;
+    busy = true;
+    idx = n;
+    track.style.transform = `translateX(${posFor(n)}px)`;
+  }
+
+  function jumpTo(n) {
+    idx = n;
+    track.style.transition = 'none';
+    track.style.transform  = `translateX(${posFor(n)}px)`;
+    void track.offsetWidth;
+    track.style.transition = '';
+  }
+
+  updateSlideWidths();
+  jumpTo(numClones);
+
+  track.addEventListener('transitionend', () => {
+    if      (idx < numClones)                 jumpTo(idx + realCount);
+    else if (idx >= numClones + realCount)    jumpTo(idx - realCount);
+    busy = false;
+  });
+
+  document.getElementById('bamPrev')?.addEventListener('click', () => slideTo(idx - 1));
+  document.getElementById('bamNext')?.addEventListener('click', () => slideTo(idx + 1));
+
+  window.addEventListener('resize', () => {
+    updateSlideWidths();
+    track.style.transition = 'none';
+    track.style.transform  = `translateX(${posFor(idx)}px)`;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      track.style.transition = '';
+    }));
+  }, { passive: true });
+</script>
