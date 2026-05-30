@@ -10,7 +10,8 @@
   --font: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --black: #000000;
   --white: #ffffff;
-  --gray: rgba(255,255,255,0.45);
+  --gray: #ccc6be;
+  --gray-dim: #7a746e;
   --site-max: 1500px;
   --gutter: 4vw;
   --nav-height: 68px;
@@ -114,9 +115,8 @@ img {
 .lang-toggle {
   font-size: 12px;
   letter-spacing: 0.04em;
-  opacity: 0.55;
+  color: var(--gray-dim);
   cursor: pointer;
-  color: var(--white);
 }
 
 /* ── Mobile menu ── */
@@ -195,7 +195,7 @@ img {
   font-size: clamp(11px, 1.2vw, 14px);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  opacity: 0.5;
+  color: var(--gray);
   font-weight: 300;
 }
 
@@ -354,7 +354,7 @@ img {
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  opacity: 0.45;
+  color: var(--gray-dim);
   margin-bottom: 0.6rem;
   font-weight: 400;
 }
@@ -377,7 +377,7 @@ img {
   content: "—";
   position: absolute;
   left: 0;
-  opacity: 0.5;
+  color: var(--gray-dim);
 }
 
 /* ── About ── */
