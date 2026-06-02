@@ -28,7 +28,7 @@ import Layout from '../layouts/Layout.astro';
 
 <style>
   .secs-page {
-    padding: calc(var(--nav-height) + 3rem) var(--gutter) 6rem;
+    padding: calc(var(--nav-height) + 3rem) 8vw 6rem;
     max-width: var(--site-max);
     margin: 0 auto;
   }
@@ -62,12 +62,10 @@ import Layout from '../layouts/Layout.astro';
 
   /* ── Description: centered, readable width ── */
   .secs-desc {
-    max-width: 640px;
-    margin: 0 auto;
     font-size: 14px;
     line-height: 1.8;
     color: var(--gray);
-    text-align: left;
+    text-align: justify;
   }
 
   .secs-desc p + p { margin-top: 1rem; }

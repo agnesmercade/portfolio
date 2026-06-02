@@ -9,67 +9,51 @@ const slides = [
   asset('/images/santander/carousel-4.jpg'),
 ];
 
-const row1 = [
-  asset('/images/santander/gallery-01.jpg'),
-  asset('/images/santander/gallery-02.jpg'),
-  asset('/images/santander/gallery-03.jpg'),
-  asset('/images/santander/gallery-04.jpg'),
-];
+// gallery-01 goes in the middle section info column
+const heroImage = { src: asset('/images/santander/gallery-01.jpg'), w: 960, h: 1440 };
 
-const row2 = [
-  asset('/images/santander/gallery-05.jpg'),
-  asset('/images/santander/gallery-06.jpg'),
-  asset('/images/santander/gallery-07.jpg'),
-  asset('/images/santander/gallery-08.jpg'),
-];
-
-const row3 = [
-  asset('/images/santander/gallery-09.jpg'),
-  asset('/images/santander/gallery-10.jpg'),
-  asset('/images/santander/gallery-11.jpg'),
-];
-
-const row4 = [
-  asset('/images/santander/gallery-12.jpg'),
-  asset('/images/santander/gallery-13.jpg'),
+// gallery-02 onwards go in the masonry grid
+const galleryImages = [
+  { src: asset('/images/santander/gallery-05.jpg'), w: 960, h: 1440 },
+  { src: asset('/images/santander/gallery-03.jpg'), w: 960, h: 640  },
+  { src: asset('/images/santander/gallery-07.jpg'), w: 960, h: 1440 },
+  { src: asset('/images/santander/gallery-02.jpg'), w: 960, h: 643  },
+  { src: asset('/images/santander/gallery-06.jpg'), w: 960, h: 1440 },
+  { src: asset('/images/santander/gallery-04.jpg'), w: 960, h: 640  },
+  { src: asset('/images/santander/gallery-08.jpg'), w: 960, h: 644  },
+  { src: asset('/images/santander/gallery-09.jpg'), w: 960, h: 1431 },
+  { src: asset('/images/santander/gallery-10.jpg'), w: 960, h: 644  },
+  { src: asset('/images/santander/gallery-11.jpg'), w: 960, h: 1431 },
+  { src: asset('/images/santander/gallery-12.jpg'), w: 960, h: 1440 },
+  { src: asset('/images/santander/gallery-13.jpg'), w: 960, h: 640  },
 ];
 ---
 
 <Layout title="Santander — Agnès Mercadé">
 
-  <!-- Full-width carousel sits directly below the fixed nav -->
+  <!-- TOP: full-width carousel sits directly below the fixed nav -->
   <div class="san-top">
     <div class="san-reel" id="sanReel">
       <div class="san-track" id="sanTrack">
-        <!-- 2 clones at start so the peek area stays filled when looping backward -->
-        <div class="san-slide">
-          <img src={slides[slides.length - 2]} alt="" />
-        </div>
-        <div class="san-slide">
-          <img src={slides[slides.length - 1]} alt="" />
-        </div>
+        <div class="san-slide"><img src={slides[slides.length - 2]} alt="" /></div>
+        <div class="san-slide"><img src={slides[slides.length - 1]} alt="" /></div>
         {slides.map(src => (
-          <div class="san-slide">
-            <img src={src} alt="" />
-          </div>
+          <div class="san-slide"><img src={src} alt="" /></div>
         ))}
-        <!-- 2 clones at end so the peek area stays filled when looping forward -->
-        <div class="san-slide">
-          <img src={slides[0]} alt="" />
-        </div>
-        <div class="san-slide">
-          <img src={slides[1]} alt="" />
-        </div>
+        <div class="san-slide"><img src={slides[0]} alt="" /></div>
+        <div class="san-slide"><img src={slides[1]} alt="" /></div>
       </div>
       <button class="san-btn san-prev" id="sanPrev" aria-label="Previous">&#8249;</button>
       <button class="san-btn san-next" id="sanNext" aria-label="Next">&#8250;</button>
     </div>
   </div>
 
-  <!-- Title, description, grid (reduced top padding since carousel is above) -->
-  <section class="project-detail san-detail">
-    <h1>Santander</h1>
-    <div class="project-description">
+  <!-- MIDDLE: title | description | first image -->
+  <div class="san-mid">
+    <div class="san-mid-left">
+      <h1 class="project-title">Santander</h1>
+    </div>
+    <div class="san-mid-center">
       <p data-i18n="san.p1">A personal project shot on 35mm film in Santander, combining color and black and white.</p>
       <p data-i18n="san.p2">
         The black and white images come from an intentional experiment during development: the film
@@ -85,41 +69,35 @@ const row4 = [
         composition, rather than a fixed narrative.
       </p>
     </div>
-
-    <div class="gallery-section">
-      <div class="project-gallery cols-4">
-        {row1.map(src => <img src={src} alt="" loading="lazy" />)}
-      </div>
+    <div class="san-mid-right">
+      <img
+        src={heroImage.src}
+        alt=""
+        width={heroImage.w}
+        height={heroImage.h}
+        loading="lazy"
+      />
     </div>
+  </div>
 
-    <div class="gallery-section">
-      <div class="project-gallery cols-4">
-        {row2.map(src => <img src={src} alt="" loading="lazy" />)}
-      </div>
+  <!-- BOTTOM: masonry grid of remaining images -->
+  <div class="san-gallery-outer">
+    <div class="san-masonry" id="sanMasonry">
+      {galleryImages.map(({ src, w, h }) => (
+        <img src={src} alt="" loading="lazy" width={w} height={h} />
+      ))}
     </div>
+  </div>
 
-    <div class="gallery-section">
-      <div class="project-gallery cols-3">
-        {row3.map(src => <img src={src} alt="" loading="lazy" />)}
-      </div>
-    </div>
-
-    <div class="gallery-section">
-      <div class="project-gallery cols-2">
-        {row4.map(src => <img src={src} alt="" loading="lazy" />)}
-      </div>
-    </div>
-  </section>
 </Layout>
 
 <style>
-  /* ── Carousel wrapper: pushes below fixed nav ── */
+  /* ── TOP: carousel ── */
   .san-top {
     padding-top: var(--nav-height);
     background: #000;
   }
 
-  /* ── Reel: fixed height, clips slides outside its bounds ── */
   .san-reel {
     position: relative;
     overflow: hidden;
@@ -127,7 +105,6 @@ const row4 = [
     height: clamp(280px, 60vh, 640px);
   }
 
-  /* ── Track: flex row, full reel height, no gap so images touch ── */
   .san-track {
     display: flex;
     height: 100%;
@@ -135,7 +112,6 @@ const row4 = [
     will-change: transform;
   }
 
-  /* ── Each slide: width = image's natural aspect ratio × reel height ── */
   .san-slide {
     flex-shrink: 0;
     height: 100%;
@@ -147,7 +123,6 @@ const row4 = [
     display: block;
   }
 
-  /* ── Prev / Next arrows ── */
   .san-btn {
     position: absolute;
     top: 50%;
@@ -166,45 +141,68 @@ const row4 = [
   .san-prev { left: 0; }
   .san-next { right: 0; }
 
-  /* ── Project detail: less top padding since carousel fills that space ── */
-  .san-detail {
-    padding-top: 3rem;
+  /* ── MIDDLE: 3-column info band ── */
+  .san-mid {
+    display: grid;
+    grid-template-columns: 3fr 4fr calc((100% - 2 * 48px) / 3);
+    gap: 48px;
+    padding: 3rem var(--gutter);
+    background: var(--black);
   }
 
-  /* ── Grid: larger gap and uniform 3:2 cells ── */
-  .project-gallery {
-    gap: 8px;
+.san-mid-center p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--gray);
+    text-align: justify;
   }
 
-  .gallery-section + .gallery-section {
-    margin-top: 8px;
+  .san-mid-center p + p {
+    margin-top: 1rem;
   }
 
-  .project-gallery img {
-    aspect-ratio: 3 / 2;
+  .san-mid-right img {
     width: 100%;
     height: auto;
-    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 860px) {
+    .san-mid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  /* ── BOTTOM: masonry gallery ── */
+  .san-gallery-outer {
+    padding: 0 4vw 6rem;
+  }
+
+  .san-masonry {
+    position: relative;
+  }
+
+  .san-masonry img {
+    position: absolute;
     display: block;
   }
 </style>
 
 <script>
+  /* ── Carousel ── */
   const reel  = document.getElementById('sanReel')  as HTMLElement;
   const track = document.getElementById('sanTrack') as HTMLElement;
 
   const realCount = 4;
-  const numClones = 2; // clones on each end
-  // DOM: [cln2, cln3, slide0, slide1, slide2, slide3, cln0, cln1]  (indices 0-7)
-  let idx  = numClones; // start at first real slide
+  const numClones = 2;
+  let idx  = numClones;
   let busy = false;
 
-  /** Slide widths may differ per image aspect ratio — read them fresh each time */
   function slideWidths(): number[] {
     return Array.from(track.children).map(el => (el as HTMLElement).offsetWidth);
   }
 
-  /** translateX that centres slide n, accounting for variable widths */
   function posFor(n: number): number {
     const widths  = slideWidths();
     const slideW  = widths[n] ?? 0;
@@ -213,7 +211,6 @@ const row4 = [
     return leftPad - offset;
   }
 
-  /** Animated move to position n */
   function slideTo(n: number) {
     if (busy) return;
     busy = true;
@@ -221,7 +218,6 @@ const row4 = [
     track.style.transform = `translateX(${posFor(n)}px)`;
   }
 
-  /** Instant (no-animation) jump — used for the infinite-loop snap */
   function jumpTo(n: number) {
     idx = n;
     track.style.transition = 'none';
@@ -230,26 +226,23 @@ const row4 = [
     track.style.transition = '';
   }
 
-  // Wait for images to have natural dimensions before positioning
-  const imgs = Array.from(track.querySelectorAll('img')) as HTMLImageElement[];
+  const carouselImgs = Array.from(track.querySelectorAll('img')) as HTMLImageElement[];
   Promise.all(
-    imgs.map(img => img.complete
+    carouselImgs.map(img => img.complete
       ? Promise.resolve()
       : new Promise<void>(res => { img.onload = () => res(); img.onerror = () => res(); })
     )
   ).then(() => jumpTo(numClones));
 
-  // After each animated transition, snap from clone zone back to real slides
   track.addEventListener('transitionend', () => {
-    if (idx < numClones)                    jumpTo(idx + realCount);
-    else if (idx >= numClones + realCount)  jumpTo(idx - realCount);
+    if (idx < numClones)                   jumpTo(idx + realCount);
+    else if (idx >= numClones + realCount) jumpTo(idx - realCount);
     busy = false;
   });
 
   document.getElementById('sanPrev')?.addEventListener('click', () => slideTo(idx - 1));
   document.getElementById('sanNext')?.addEventListener('click', () => slideTo(idx + 1));
 
-  // Reposition without animation on resize so layout stays correct
   window.addEventListener('resize', () => {
     track.style.transition = 'none';
     track.style.transform  = `translateX(${posFor(idx)}px)`;
@@ -257,4 +250,47 @@ const row4 = [
       track.style.transition = '';
     }));
   }, { passive: true });
+
+  /* ── Masonry gallery ── */
+  const GAP = 48;
+  const masonry = document.getElementById('sanMasonry')!;
+  const masonryImgs = Array.from(masonry.querySelectorAll('img')) as HTMLImageElement[];
+
+  function numCols(): number {
+    if (window.innerWidth <= 560) return 1;
+    if (window.innerWidth <= 900) return 2;
+    return 3;
+  }
+
+  function layoutMasonry() {
+    const n      = numCols();
+    const totalW = masonry.offsetWidth;
+    const colW   = (totalW - (n - 1) * GAP) / n;
+
+    const tops  = new Array<number>(n).fill(0);
+    const lefts = Array.from({ length: n }, (_, i) => i * (colW + GAP));
+
+    masonryImgs.forEach(img => {
+      const iw   = parseInt(img.getAttribute('width')!);
+      const ih   = parseInt(img.getAttribute('height')!);
+      const imgH = colW * (ih / iw);
+
+      let col = 0;
+      for (let i = 1; i < n; i++) {
+        if (tops[i] < tops[col]) col = i;
+      }
+
+      img.style.width  = colW + 'px';
+      img.style.height = imgH + 'px';
+      img.style.left   = lefts[col] + 'px';
+      img.style.top    = tops[col]  + 'px';
+
+      tops[col] += imgH + GAP;
+    });
+
+    masonry.style.height = (Math.max(...tops) - GAP) + 'px';
+  }
+
+  layoutMasonry();
+  window.addEventListener('resize', layoutMasonry, { passive: true });
 </script>

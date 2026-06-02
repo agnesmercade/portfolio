@@ -17,7 +17,7 @@ const images = [
 <Layout title="Echoes of Comfort — Agnès Mercadé">
 
   <section class="project-detail eoc-detail">
-    <h1>Echoes of Comfort</h1>
+    <h1 class="project-title">Echoes of Comfort</h1>
     <div class="project-description">
       <p data-i18n="eoc.p1">This project was developed as my final year major project during my BA in Photography.</p>
       <p data-i18n="eoc.p2">
@@ -54,6 +54,14 @@ const images = [
 <style>
   .eoc-detail {
     padding-bottom: 0;
+    max-width: none;
+    padding-left: 8vw;
+    padding-right: 8vw;
+  }
+
+  .eoc-detail .project-description {
+    text-align: justify;
+    max-width: none;
   }
 
   .eoc-outer {

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -71,7 +71,7 @@ img {
 }
 
 .header-logo img {
-  height: 44px;
+  height: 53px;
   width: auto;
   display: block;
 }
@@ -189,12 +189,12 @@ img {
   letter-spacing: 0.02em;
   line-height: 1.2;
   margin-bottom: 1.25rem;
+  white-space: nowrap;
 }
 
 .hero-sub {
   font-size: clamp(11px, 1.2vw, 14px);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
   color: var(--gray);
   font-weight: 300;
 }
@@ -251,9 +251,9 @@ img {
   padding: calc(var(--nav-height) + 3rem) var(--gutter) 5rem;
 }
 
-.project-detail h1 {
-  font-size: clamp(28px, 4vw, 48px);
-  font-weight: 300;
+.project-title {
+  font-size: clamp(28px, 5vw, 65px);
+  font-weight: 700;
   letter-spacing: 0.02em;
   margin-bottom: 2rem;
   color: var(--white);
@@ -265,6 +265,7 @@ img {
   color: var(--gray);
   max-width: 640px;
   margin-bottom: 3.5rem;
+  text-align: justify;
 }
 
 .project-description p + p { margin-top: 1rem; }
@@ -382,9 +383,7 @@ img {
 
 /* ── About ── */
 .about-page {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: calc(var(--nav-height) + 4rem) var(--gutter) 5rem;
+  padding: calc(var(--nav-height) + 4rem) 8vw 5rem;
 }
 
 .about-page p {
@@ -392,6 +391,7 @@ img {
   line-height: 1.85;
   color: var(--gray);
   margin-bottom: 1.5rem;
+  text-align: justify;
 }
 
 .about-contact {

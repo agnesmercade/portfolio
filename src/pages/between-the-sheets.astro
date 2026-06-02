@@ -24,7 +24,7 @@ const row2 = [
     <!-- ── Top: text left │ wide screenshot right ── -->
     <div class="bts-top">
       <div class="bts-text">
-        <h1>Between the sheets</h1>
+        <h1 class="project-title">Between the sheets</h1>
         <div class="bts-desc">
           <p data-i18n="bts.p1">An ongoing photographic series set within Barcelona's interior courtyards.</p>
           <p data-i18n="bts.p2">Through laundry lines, hanging sheets, and shifting light, the images linger on quiet traces of everyday life hidden inside the city's blocks. The series explores the subtle rhythms of these spaces where architecture, light, and domestic details create an intimate, almost private atmosphere.</p>
@@ -61,18 +61,11 @@ const row2 = [
     margin-bottom: 6rem;
   }
 
-  .bts-text h1 {
-    font-size: clamp(28px, 4vw, 48px);
-    font-weight: 300;
-    letter-spacing: 0.02em;
-    margin-bottom: 2rem;
-    color: var(--white);
-  }
-
-  .bts-desc {
+.bts-desc {
     font-size: 14px;
     line-height: 1.8;
     color: var(--gray);
+    text-align: justify;
   }
 
   .bts-desc p + p { margin-top: 1rem; }

@@ -2,17 +2,16 @@
 import Layout from '../layouts/Layout.astro';
 import { asset } from '../utils/url';
 
-// 9 images matching the reference layout (mix of Santander + Echoes of Comfort)
 const images = [
-  { href: asset('/santander'),         src: asset('/images/santander/carousel-1.jpg') },
-  { href: asset('/santander'),         src: asset('/images/santander/gallery-03.jpg') },
-  { href: asset('/santander'),         src: asset('/images/santander/gallery-08.jpg') },
-  { href: asset('/echoes-of-comfort'), src: asset('/images/echoes/03.jpg') },
-  { href: asset('/santander'),         src: asset('/images/santander/carousel-2.jpg') },
-  { href: asset('/santander'),         src: asset('/images/home/gallery-06.jpg') },
-  { href: asset('/echoes-of-comfort'), src: asset('/images/echoes/01.jpg') },
-  { href: asset('/echoes-of-comfort'), src: asset('/images/echoes/02.jpg') },
-  { href: asset('/santander'),         src: asset('/images/santander/gallery-04.jpg') },
+  { href: asset('/santander'),         src: asset('/images/santander/gallery-03.jpg'), w: 960,  h: 640  },
+  { href: asset('/santander'),         src: asset('/images/santander/carousel-1.jpg'), w: 1600, h: 2385 },
+  { href: asset('/santander'),         src: asset('/images/santander/gallery-08.jpg'), w: 960,  h: 644  },
+  { href: asset('/echoes-of-comfort'), src: asset('/images/echoes/03.jpg'),            w: 1000, h: 1482 },
+  { href: asset('/santander'),         src: asset('/images/santander/carousel-2.jpg'), w: 1600, h: 1073 },
+  { href: asset('/santander'),         src: asset('/images/home/gallery-06.jpg'),      w: 960,  h: 1440 },
+  { href: asset('/echoes-of-comfort'), src: asset('/images/echoes/01.jpg'),            w: 1000, h: 1487 },
+  { href: asset('/echoes-of-comfort'), src: asset('/images/echoes/02.jpg'),            w: 1000, h: 672  },
+  { href: asset('/santander'),         src: asset('/images/santander/gallery-04.jpg'), w: 960,  h: 640  },
 ];
 ---
 
@@ -27,7 +26,7 @@ const images = [
   <div id="homeGallery">
     {images.map(item => (
       <a href={item.href} class="gal-item">
-        <img src={item.src} alt="" />
+        <img src={item.src} alt="" width={item.w} height={item.h} />
       </a>
     ))}
   </div>
@@ -95,24 +94,24 @@ const images = [
     const W = gallery.offsetWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
     if (!W) return;
 
-    // Aspect ratios (fallback 3:2 if image not yet loaded)
+    // Aspect ratios from width/height attributes (accurate before load)
     const ratios = items.map(el => {
       const img = el.querySelector('img') as HTMLImageElement;
+      const attrW = parseInt(img?.getAttribute('width') || '0');
+      const attrH = parseInt(img?.getAttribute('height') || '0');
+      if (attrW && attrH) return attrW / attrH;
       return img?.naturalWidth && img?.naturalHeight
         ? img.naturalWidth / img.naturalHeight
         : 1.5;
     });
 
-    const n = items.length;
-
     const vw = window.innerWidth;
 
-    // Single column on small phones — use viewport width so padding doesn't skew the check
+    // Single column on small phones
     if (vw < 768) {
       gallery.innerHTML = '';
       gallery.style.cssText = 'display:flex;flex-direction:column;gap:8px;background:#000;';
       items.forEach(el => {
-        // height:auto overrides the CSS fallback (200px) so aspect ratio is preserved
         el.style.cssText = 'display:block;width:100%;height:auto;overflow:hidden;';
         const img = el.querySelector('img') as HTMLImageElement | null;
         if (img) img.style.cssText = 'width:100%;height:auto;display:block;transition:transform 0.65s ease;';
@@ -121,31 +120,16 @@ const images = [
       return;
     }
 
-    // Justified rows.
-    // Math.floor keeps nRows conservative so the last row is never a lone image.
-    // Breakpoints: <768 single-col | 768-1023 ~2/row | 1024-1340 ~3/row | 1341+ ~4-5/row
-    const targetPerRow = vw >= 1341 ? 4.5 : vw >= 1024 ? 3 : 2;
-    const nRows = Math.max(1, Math.floor(n / targetPerRow));
-
-    // Partition by image count (floor(n/nRows) per row) so the number of images per row
-    // matches the target regardless of aspect ratios. The last row absorbs the remainder.
-    const imgsPerRow = Math.floor(n / nRows);
+    // Fixed row distribution: 3 | 4 | 2
+    const rowSizes = [3, 4, 2];
     type Entry = { el: HTMLElement; ratio: number };
     const rows: Entry[][] = [];
-    let cur: Entry[] = [];
-
-    for (let i = 0; i < n; i++) {
-      cur.push({ el: items[i], ratio: ratios[i] });
-      if (cur.length >= imgsPerRow && rows.length < nRows - 1) {
-        rows.push(cur);
-        cur = [];
-      }
-    }
-    if (cur.length) rows.push(cur);
-
-    // Safety: lone last image → borrow one from previous row
-    if (rows.length > 1 && rows[rows.length - 1].length === 1 && rows[rows.length - 2].length > 1) {
-      rows[rows.length - 1].unshift(rows[rows.length - 2].pop()!);
+    let offset = 0;
+    for (const size of rowSizes) {
+      rows.push(
+        items.slice(offset, offset + size).map((el, i) => ({ el, ratio: ratios[offset + i] }))
+      );
+      offset += size;
     }
 
     // Rebuild DOM

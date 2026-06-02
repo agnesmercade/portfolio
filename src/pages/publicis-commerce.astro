@@ -22,7 +22,7 @@ const imgBotCenter = asset('/images/publicis/screen-bot-center.webp');
     <div class="pub-top">
 
       <div class="pub-text">
-        <h1>Publicis Commerce</h1>
+        <h1 class="project-title">Publicis Commerce</h1>
         <h4 data-i18n="pub.subtitle">Adaptation to the Spanish market</h4>
         <div class="pub-desc">
           <p data-i18n="pub.p1">This project was developed as part of a UX/UI-focused module during my Master's Degree in Digital Marketing. We created a strategy to bring Publicis Commerce closer to SMEs and startups, translating its global proposition into a clear and relevant digital experience for the Spanish market.</p>
@@ -85,12 +85,8 @@ const imgBotCenter = asset('/images/publicis/screen-bot-center.webp');
     margin-bottom: 4rem;
   }
 
-  .pub-text h1 {
-    font-size: clamp(28px, 4vw, 48px);
-    font-weight: 300;
-    letter-spacing: 0.02em;
+  .project-title {
     margin-bottom: 0.75rem;
-    color: var(--white);
   }
 
   .pub-text h4 {
@@ -106,6 +102,7 @@ const imgBotCenter = asset('/images/publicis/screen-bot-center.webp');
     font-size: 14px;
     line-height: 1.8;
     color: var(--gray);
+    text-align: justify;
   }
 
   .pub-desc p + p { margin-top: 1rem; }
