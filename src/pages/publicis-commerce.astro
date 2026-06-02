@@ -18,12 +18,14 @@ const imgBotCenter = asset('/images/publicis/screen-bot-center.webp');
 <Layout title="Publicis Commerce — Agnès Mercadé">
   <div class="pub-page">
 
-    <!-- ── Top: text left │ wide screenshot + Idea right ── -->
+    <!-- ── Title row: full width ── -->
+    <h1 class="project-title">Publicis Commerce</h1>
+
+    <!-- ── Top: text left │ wide screenshot right ── -->
     <div class="pub-top">
 
       <div class="pub-text">
-        <h1 class="project-title">Publicis Commerce</h1>
-        <h4 data-i18n="pub.subtitle">Adaptation to the Spanish market</h4>
+        <p class="pub-label" data-i18n="pub.subtitle">Adaptation to the Spanish market</p>
         <div class="pub-desc">
           <p data-i18n="pub.p1">This project was developed as part of a UX/UI-focused module during my Master's Degree in Digital Marketing. We created a strategy to bring Publicis Commerce closer to SMEs and startups, translating its global proposition into a clear and relevant digital experience for the Spanish market.</p>
 
@@ -86,16 +88,11 @@ const imgBotCenter = asset('/images/publicis/screen-bot-center.webp');
   }
 
   .project-title {
-    margin-bottom: 0.75rem;
+    margin-bottom: 2.5rem;
   }
 
-  .pub-text h4 {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    opacity: 0.75;
-    font-weight: 400;
-    margin-bottom: 2rem;
+  .pub-text > .pub-label:first-child {
+    margin-top: 0;
   }
 
   .pub-desc {
