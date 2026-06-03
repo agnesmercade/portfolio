@@ -28,7 +28,7 @@ import Layout from '../layouts/Layout.astro';
 
 <style>
   .secs-page {
-    padding: calc(var(--nav-height) + 3rem) 8vw 6rem;
+    padding: calc(var(--nav-height) + 3rem) 13vw 6rem;
     max-width: var(--site-max);
     margin: 0 auto;
   }
@@ -43,12 +43,12 @@ import Layout from '../layouts/Layout.astro';
     text-align: center;
   }
 
-  /* ── Video: centered, 70% wide, responsive 16:9 ── */
+  /* ── Video: full content width, responsive 16:9 ── */
   .secs-video {
     position: relative;
-    width: 70%;
-    margin: 0 auto 3rem;
-    padding-bottom: calc(70% * 9 / 16);
+    width: 100%;
+    margin: 0 0 3rem;
+    padding-bottom: 56.25%;
     height: 0;
   }
 
@@ -70,10 +70,4 @@ import Layout from '../layouts/Layout.astro';
 
   .secs-desc p + p { margin-top: 1rem; }
 
-  @media (max-width: 767px) {
-    .secs-video {
-      width: 100%;
-      padding-bottom: 56.25%;
-    }
-  }
 </style>
